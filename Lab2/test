@@ -1,0 +1,184 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1110-g18392a46)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "C:\iverilog\lib\ivl\system.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\va_math.vpi";
+S_00000268ecadda10 .scope module, "addersubtractor" "addersubtractor" 2 1;
+ .timescale 0 0;
+    .port_info 0 /INPUT 4 "a";
+    .port_info 1 /INPUT 4 "b";
+    .port_info 2 /OUTPUT 4 "sum";
+    .port_info 3 /OUTPUT 1 "cout";
+    .port_info 4 /OUTPUT 1 "overflow";
+    .port_info 5 /INPUT 1 "signal";
+o00000268ecb2cfa8 .functor BUFZ 4, C4<zzzz>; HiZ drive
+v00000268ecb23640_0 .net "a", 3 0, o00000268ecb2cfa8;  0 drivers
+o00000268ecb2d248 .functor BUFZ 4, C4<zzzz>; HiZ drive
+v00000268ecb236e0_0 .net "b", 3 0, o00000268ecb2d248;  0 drivers
+v00000268ecb23780_0 .var "b1", 3 0;
+v00000268ecb239b0_0 .net "cout", 0 0, v00000268ecb2a1d0_0;  1 drivers
+v00000268ecb24090_0 .net "overflow", 0 0, v00000268ecb2a270_0;  1 drivers
+o00000268ecb2d038 .functor BUFZ 1, C4<z>; HiZ drive
+v00000268ecb23c30_0 .net "signal", 0 0, o00000268ecb2d038;  0 drivers
+v00000268ecb23af0_0 .net "sum", 3 0, v00000268ecb2a310_0;  1 drivers
+S_00000268ecb29fa0 .scope module, "myadder" "fulladder" 2 14, 3 1 0, S_00000268ecadda10;
+ .timescale 0 0;
+    .port_info 0 /INPUT 4 "a";
+    .port_info 1 /INPUT 4 "b";
+    .port_info 2 /OUTPUT 4 "sum";
+    .port_info 3 /OUTPUT 1 "cout";
+    .port_info 4 /OUTPUT 1 "overflow";
+    .port_info 5 /INPUT 1 "cin";
+v00000268ecaddd30_0 .net "a", 3 0, o00000268ecb2cfa8;  alias, 0 drivers
+v00000268ecaf2c70_0 .net "b", 3 0, v00000268ecb23780_0;  1 drivers
+v00000268ecaf28d0_0 .var "c3", 0 0;
+v00000268ecb2a130_0 .net "cin", 0 0, o00000268ecb2d038;  alias, 0 drivers
+v00000268ecb2a1d0_0 .var "cout", 0 0;
+v00000268ecb2a270_0 .var "overflow", 0 0;
+v00000268ecb2a310_0 .var "sum", 3 0;
+v00000268ecb2a3b0_0 .var "temp", 2 0;
+E_00000268ecad75e0 .event anyedge, v00000268ecb2a130_0, v00000268ecaf2c70_0, v00000268ecaddd30_0;
+S_00000268ecaddba0 .scope module, "testbench" "testbench" 4 1;
+ .timescale 0 0;
+v00000268ecb24130_0 .var "a", 3 0;
+v00000268ecb246d0_0 .var "b", 3 0;
+v00000268ecb23eb0_0 .net "cout", 0 0, v00000268ecb24630_0;  1 drivers
+v00000268ecb24450_0 .net "overflow", 0 0, v00000268ecb23f50_0;  1 drivers
+v00000268ecb23a50_0 .var "signal", 0 0;
+v00000268ecb241d0_0 .net "sum", 3 0, v00000268ecb23ff0_0;  1 drivers
+S_00000268ecb24830 .scope module, "myadder" "fulladder" 4 8, 3 1 0, S_00000268ecaddba0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 4 "a";
+    .port_info 1 /INPUT 4 "b";
+    .port_info 2 /OUTPUT 4 "sum";
+    .port_info 3 /OUTPUT 1 "cout";
+    .port_info 4 /OUTPUT 1 "overflow";
+    .port_info 5 /INPUT 1 "cin";
+v00000268ecb23870_0 .net "a", 3 0, v00000268ecb24130_0;  1 drivers
+v00000268ecb23910_0 .net "b", 3 0, v00000268ecb246d0_0;  1 drivers
+v00000268ecb23e10_0 .var "c3", 0 0;
+v00000268ecb23b90_0 .net "cin", 0 0, v00000268ecb23a50_0;  1 drivers
+v00000268ecb24630_0 .var "cout", 0 0;
+v00000268ecb23f50_0 .var "overflow", 0 0;
+v00000268ecb23ff0_0 .var "sum", 3 0;
+v00000268ecb24770_0 .var "temp", 2 0;
+E_00000268ecad78e0 .event anyedge, v00000268ecb23b90_0, v00000268ecb23910_0, v00000268ecb23870_0;
+    .scope S_00000268ecb29fa0;
+T_0 ;
+    %wait E_00000268ecad75e0;
+    %load/vec4 v00000268ecaddd30_0;
+    %pad/u 5;
+    %load/vec4 v00000268ecaf2c70_0;
+    %pad/u 5;
+    %add;
+    %load/vec4 v00000268ecb2a130_0;
+    %pad/u 5;
+    %add;
+    %split/vec4 4;
+    %store/vec4 v00000268ecb2a310_0, 0, 4;
+    %store/vec4 v00000268ecb2a1d0_0, 0, 1;
+    %load/vec4 v00000268ecaddd30_0;
+    %parti/s 3, 0, 2;
+    %pad/u 4;
+    %load/vec4 v00000268ecaf2c70_0;
+    %parti/s 3, 0, 2;
+    %pad/u 4;
+    %add;
+    %load/vec4 v00000268ecb2a130_0;
+    %pad/u 4;
+    %add;
+    %split/vec4 3;
+    %store/vec4 v00000268ecb2a3b0_0, 0, 3;
+    %store/vec4 v00000268ecaf28d0_0, 0, 1;
+    %load/vec4 v00000268ecaf28d0_0;
+    %load/vec4 v00000268ecb2a1d0_0;
+    %xor;
+    %store/vec4 v00000268ecb2a270_0, 0, 1;
+    %jmp T_0;
+    .thread T_0, $push;
+    .scope S_00000268ecadda10;
+T_1 ;
+    %load/vec4 v00000268ecb236e0_0;
+    %load/vec4 v00000268ecb23c30_0;
+    %pad/u 4;
+    %xor;
+    %store/vec4 v00000268ecb23780_0, 0, 4;
+    %end;
+    .thread T_1;
+    .scope S_00000268ecb24830;
+T_2 ;
+    %wait E_00000268ecad78e0;
+    %load/vec4 v00000268ecb23870_0;
+    %pad/u 5;
+    %load/vec4 v00000268ecb23910_0;
+    %pad/u 5;
+    %add;
+    %load/vec4 v00000268ecb23b90_0;
+    %pad/u 5;
+    %add;
+    %split/vec4 4;
+    %store/vec4 v00000268ecb23ff0_0, 0, 4;
+    %store/vec4 v00000268ecb24630_0, 0, 1;
+    %load/vec4 v00000268ecb23870_0;
+    %parti/s 3, 0, 2;
+    %pad/u 4;
+    %load/vec4 v00000268ecb23910_0;
+    %parti/s 3, 0, 2;
+    %pad/u 4;
+    %add;
+    %load/vec4 v00000268ecb23b90_0;
+    %pad/u 4;
+    %add;
+    %split/vec4 3;
+    %store/vec4 v00000268ecb24770_0, 0, 3;
+    %store/vec4 v00000268ecb23e10_0, 0, 1;
+    %load/vec4 v00000268ecb23e10_0;
+    %load/vec4 v00000268ecb24630_0;
+    %xor;
+    %store/vec4 v00000268ecb23f50_0, 0, 1;
+    %jmp T_2;
+    .thread T_2, $push;
+    .scope S_00000268ecaddba0;
+T_3 ;
+    %vpi_call 4 12 "$monitor", $time, "a = %b | b = %b | sum = %b | carry = %b | overflow=%b | signal = %b", v00000268ecb24130_0, v00000268ecb246d0_0, v00000268ecb241d0_0, v00000268ecb23eb0_0, v00000268ecb24450_0, v00000268ecb23a50_0 {0 0 0};
+    %delay 0, 0;
+    %pushi/vec4 5, 0, 4;
+    %store/vec4 v00000268ecb24130_0, 0, 4;
+    %pushi/vec4 15, 0, 4;
+    %store/vec4 v00000268ecb246d0_0, 0, 4;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000268ecb23a50_0, 0, 1;
+    %delay 4, 0;
+    %pushi/vec4 6, 0, 4;
+    %store/vec4 v00000268ecb24130_0, 0, 4;
+    %pushi/vec4 10, 0, 4;
+    %store/vec4 v00000268ecb246d0_0, 0, 4;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000268ecb23a50_0, 0, 1;
+    %delay 4, 0;
+    %pushi/vec4 8, 0, 4;
+    %store/vec4 v00000268ecb24130_0, 0, 4;
+    %pushi/vec4 8, 0, 4;
+    %store/vec4 v00000268ecb246d0_0, 0, 4;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v00000268ecb23a50_0, 0, 1;
+    %delay 4, 0;
+    %pushi/vec4 8, 0, 4;
+    %store/vec4 v00000268ecb24130_0, 0, 4;
+    %pushi/vec4 1, 0, 4;
+    %store/vec4 v00000268ecb246d0_0, 0, 4;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v00000268ecb23a50_0, 0, 1;
+    %end;
+    .thread T_3;
+# The file index is used to find the file name in the following table.
+:file_names 5;
+    "N/A";
+    "<interactive>";
+    "addersubtractor.v";
+    "fulladder_beh.v";
+    "Tb_addersubtractor.v";

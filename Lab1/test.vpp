@@ -1,0 +1,71 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1110-g18392a46)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "C:\iverilog\lib\ivl\system.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\va_math.vpi";
+S_0000022582d46590 .scope module, "stimulus" "stimulus" 2 1;
+ .timescale 0 0;
+v0000022582d88d80_0 .var "in", 3 0;
+v0000022582d881a0_0 .net "out", 3 0, L_0000022582d88060;  1 drivers
+S_0000022582d46720 .scope module, "myconverter" "bcdToGray" 2 6, 3 1 0, S_0000022582d46590;
+ .timescale 0 0;
+    .port_info 0 /OUTPUT 4 "Out";
+    .port_info 1 /INPUT 4 "In";
+L_0000022582d469f0 .functor BUF 1, L_0000022582d88e20, C4<0>, C4<0>, C4<0>;
+L_0000022582eaa3b0 .functor XOR 1, L_0000022582d88920, L_0000022582d88ec0, C4<0>, C4<0>;
+L_0000022582d12dd0 .functor XOR 1, L_0000022582d88f60, L_0000022582d887e0, C4<0>, C4<0>;
+L_0000022582d447b0 .functor XOR 1, L_0000022582d882e0, L_0000022582d886a0, C4<0>, C4<0>;
+v0000022582d468b0_0 .net "In", 3 0, v0000022582d88d80_0;  1 drivers
+v0000022582d128d0_0 .net "Out", 3 0, L_0000022582d88060;  alias, 1 drivers
+v0000022582eaaef0_0 .net *"_ivl_0", 0 0, L_0000022582d469f0;  1 drivers
+v0000022582d46950_0 .net *"_ivl_10", 0 0, L_0000022582d12dd0;  1 drivers
+v0000022582d44670_0 .net *"_ivl_13", 0 0, L_0000022582d88f60;  1 drivers
+v0000022582d44710_0 .net *"_ivl_15", 0 0, L_0000022582d887e0;  1 drivers
+v0000022582d88c40_0 .net *"_ivl_16", 0 0, L_0000022582d447b0;  1 drivers
+v0000022582d88100_0 .net *"_ivl_20", 0 0, L_0000022582d882e0;  1 drivers
+v0000022582d88ce0_0 .net *"_ivl_22", 0 0, L_0000022582d886a0;  1 drivers
+v0000022582d884c0_0 .net *"_ivl_3", 0 0, L_0000022582d88e20;  1 drivers
+v0000022582d88880_0 .net *"_ivl_4", 0 0, L_0000022582eaa3b0;  1 drivers
+v0000022582d88ba0_0 .net *"_ivl_7", 0 0, L_0000022582d88920;  1 drivers
+v0000022582d88240_0 .net *"_ivl_9", 0 0, L_0000022582d88ec0;  1 drivers
+L_0000022582d88e20 .part v0000022582d88d80_0, 3, 1;
+L_0000022582d88920 .part v0000022582d88d80_0, 3, 1;
+L_0000022582d88ec0 .part v0000022582d88d80_0, 2, 1;
+L_0000022582d88f60 .part v0000022582d88d80_0, 2, 1;
+L_0000022582d887e0 .part v0000022582d88d80_0, 1, 1;
+L_0000022582d88060 .concat8 [ 1 1 1 1], L_0000022582d447b0, L_0000022582d12dd0, L_0000022582eaa3b0, L_0000022582d469f0;
+L_0000022582d882e0 .part v0000022582d88d80_0, 1, 1;
+L_0000022582d886a0 .part v0000022582d88d80_0, 0, 1;
+    .scope S_0000022582d46590;
+T_0 ;
+    %vpi_call 2 10 "$monitor", $time, " in = %4b, out = %4b\012", v0000022582d88d80_0, v0000022582d881a0_0 {0 0 0};
+    %delay 0, 0;
+    %pushi/vec4 0, 0, 4;
+    %store/vec4 v0000022582d88d80_0, 0, 4;
+    %pushi/vec4 9, 0, 32;
+T_0.0 %dup/vec4;
+    %pushi/vec4 0, 0, 32;
+    %cmp/s;
+    %jmp/1xz T_0.1, 5;
+    %jmp/1 T_0.1, 4;
+    %pushi/vec4 1, 0, 32;
+    %sub;
+    %delay 10, 0;
+    %load/vec4 v0000022582d88d80_0;
+    %addi 1, 0, 4;
+    %store/vec4 v0000022582d88d80_0, 0, 4;
+    %jmp T_0.0;
+T_0.1 ;
+    %pop/vec4 1;
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "Tb_LE1Gate.v";
+    "LE1Gate.v";
